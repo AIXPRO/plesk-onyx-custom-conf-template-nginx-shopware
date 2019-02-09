@@ -121,7 +121,7 @@ server {
     location ~ ^/(.*\.(<?php echo $VAR->domain->physicalHosting->proxySettings['nginxStaticExtensions'] ?>))$ {
         try_files $uri @fallback;
         <?php if ($VAR->domain->physicalHosting->expires && $VAR->domain->physicalHosting->expiresStaticOnly): ?>
-        expires <?=$VAR->quote($VAR->domain->physicalHosting->expires)?>;
+        expires 30d;
         <?php endif ?>
     }
 <?php endif ?>
@@ -155,6 +155,12 @@ server {
     ## Deny all attempts to access hidden files such as .env, .htaccess, .htpasswd, .DS_Store (Mac).
     location ~ /\. {
         return 404;
+    }
+
+    ## Deny all attempts to access Stageware data
+    location ~* /_stage_ware_data {
+	deny all;
+	return 404;
     }
 
     ## Deny all attems to access possible configuration files
@@ -213,6 +219,163 @@ server {
             rewrite . /recovery/update/index.php last;
         }
     }
+    
+
+    location /stageware1/ {
+	index index.html index.php shopware.php;
+	rewrite shopware.dll /stageware1/shopware.php;
+	rewrite files/documents/.* /engine last;
+	#rewrite images/ayww/(.*) /images/banner/$1 last;
+	rewrite backend/media/(.*) /media/$1 last;
+	if (!-e $request_filename){
+		rewrite . /stageware1/shopware.php last;
+    }
+
+    location ~ \.(jpe?g|png|gif|css|js)$ {
+	rewrite backend/media/(.*) /media/$1 last;
+	expires 1M;
+
+    }
+    # Shopware install / update
+    location /stageware1/recovery/install {
+	index index.php;
+	try_files $uri /stageware1/recovery/install/index.php$is_args$args;
+    }
+
+    location /stageware1/recovery/update/ {
+	index index.php;
+	try_files $uri $uri/ /stageware1/recovery/update/index.php$is_args$args;
+    }
+
+    location = /stageware1/recovery/update/index.php/checks {
+	rewrite ^.*$ /stageware1/recovery/update/dbmigration permanent;
+    }
+   }
+
+    location /stageware2/ {
+        index index.html index.php shopware.php;
+	rewrite shopware.dll /stageware2/shopware.php;
+	rewrite files/documents/.* /engine last;
+	#rewrite images/ayww/(.*) /images/banner/$1 last;
+	rewrite backend/media/(.*) /media/$1 last;
+	if (!-e $request_filename){
+		rewrite . /stageware2/shopware.php last;
+    }
+
+    location ~ \.(jpe?g|png|gif|css|js)$ {
+	rewrite backend/media/(.*) /media/$1 last;
+	expires 1M;
+    }
+
+    # Shopware install / update
+	location /stageware2/recovery/install {
+	index index.php;
+	try_files $uri /stageware2/recovery/install/index.php$is_args$args;
+    }
+
+    location /stageware2/recovery/update/ {
+	index index.php;
+	try_files $uri $uri/ /stageware2/recovery/update/index.php$is_args$args;
+    }
+
+    location = /stageware2/recovery/update/index.php/checks {
+	rewrite ^.*$ /stageware2/recovery/update/dbmigration permanent;
+    }
+   }
+
+    location /stageware3/ {
+	index index.html index.php shopware.php;
+	rewrite shopware.dll /stageware3/shopware.php;
+	rewrite files/documents/.* /engine last;
+	#rewrite images/ayww/(.*) /images/banner/$1 last;
+	rewrite backend/media/(.*) /media/$1 last;
+	if (!-e $request_filename){
+		rewrite . /stageware3/shopware.php last;
+    }
+
+    location ~ \.(jpe?g|png|gif|css|js)$ {
+	rewrite backend/media/(.*) /media/$1 last;
+	expires 1M;
+    }
+
+    # Shopware install / update
+    location /stageware3/recovery/install {
+	index index.php;
+	try_files $uri /stageware3/recovery/install/index.php$is_args$args;
+    }
+
+    location /stageware3/recovery/update/ {
+	index index.php;
+	try_files $uri $uri/ /stageware3/recovery/update/index.php$is_args$args;
+    }
+
+    location = /stageware3/recovery/update/index.php/checks {
+	rewrite ^.*$ /stageware3/recovery/update/dbmigration permanent;
+    }
+   }
+
+    location /stageware4/ {
+	index index.html index.php shopware.php;
+	rewrite shopware.dll /stageware4/shopware.php;
+	rewrite files/documents/.* /engine last;
+	#rewrite images/ayww/(.*) /images/banner/$1 last;
+	rewrite backend/media/(.*) /media/$1 last;
+	if (!-e $request_filename){
+		rewrite . /stageware4/shopware.php last;
+    }
+
+    location ~ \.(jpe?g|png|gif|css|js)$ {
+	rewrite backend/media/(.*) /media/$1 last;
+	expires 1M;
+    }
+
+    # Shopware install / update
+	location /stageware4/recovery/install {
+	index index.php;
+	try_files $uri /stageware4/recovery/install/index.php$is_args$args;
+    }
+
+    location /stageware4/recovery/update/ {
+	index index.php;
+	try_files $uri $uri/ /stageware4/recovery/update/index.php$is_args$args;
+    }
+
+    location = /stageware4/recovery/update/index.php/checks {
+	rewrite ^.*$ /stageware4/recovery/update/dbmigration permanent;
+    }
+   }
+
+    location /stageware5/ {
+	index index.html index.php shopware.php;
+	rewrite shopware.dll /stageware5/shopware.php;
+	rewrite files/documents/.* /engine last;
+	#rewrite images/ayww/(.*) /images/banner/$1 last;
+	rewrite backend/media/(.*) /media/$1 last;
+	if (!-e $request_filename){
+		rewrite . /stageware5/shopware.php last;
+    }
+
+    location ~ \.(jpe?g|png|gif|css|js)$ {
+	rewrite backend/media/(.*) /media/$1 last;
+	expires 1M;
+    }
+
+    # Shopware install / update
+    location /stageware5/recovery/install {
+	index index.php;
+	try_files $uri /stageware5/recovery/install/index.php$is_args$args;
+    }
+
+    location /stageware5/recovery/update/ {
+	index index.php;
+	try_files $uri $uri/ /stageware5/recovery/update/index.php$is_args$args;
+    }
+
+    location = /stageware5/recovery/update/index.php/checks {
+	rewrite ^.*$ /stageware5/recovery/update/dbmigration permanent;
+    }
+   }
+
     <?php endif ?>
 
     <?php if ($VAR->domain->physicalHosting->directoryIndex): ?>
@@ -306,7 +469,6 @@ server {
 <?php foreach ((array)$VAR->domain->physicalHosting->headers as list($name, $value)): ?>
     add_header <?=$VAR->quote([$name, $value])?>;
 <?php endforeach ?>
-    add_header X-Powered-By Shopware;
 
 <?php if (is_file($VAR->domain->physicalHosting->customNginxConfigFile)): ?>
     include "<?php echo $VAR->domain->physicalHosting->customNginxConfigFile ?>";
