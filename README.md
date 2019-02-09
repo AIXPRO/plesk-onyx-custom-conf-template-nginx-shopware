@@ -29,7 +29,7 @@ cd ./custom
 ```
 
 ```bash
-git clone https://github.com/plugware/plesk-onyx-custom-conf-template-nginx-shopware.git ./
+git clone https://github.com/AIXPRO/plesk-onyx-nginx-shopware-with-stageware-support.git ./
 ```
 
 In case you want to use wget or curl instead of git:
@@ -37,13 +37,13 @@ In case you want to use wget or curl instead of git:
 cd /tmp
 ```
 ```bash
-wget -O - https://github.com/plugware/plesk-onyx-custom-conf-template-nginx-shopware/tarball/master | tar xz
+wget -O - https://github.com/AIXPRO/plesk-onyx-nginx-shopware-with-stageware-support/tarball/master | tar xz
 ```
 ```bash
-curl -L https://github.com/plugware/plesk-onyx-custom-conf-template-nginx-shopware/tarball/master | tar xz
+curl -L https://github.com/AIXPRO/plesk-onyx-nginx-shopware-with-stageware-support/tarball/master | tar xz
 ```
 ```bash
-cd plugware-plesk-onyx-custom-conf-template-nginx-shopware-*
+cd AIXPRO/plesk-onyx-nginx-shopware-with-stageware-support-*
 cp -r ./domain /usr/local/psa/admin/conf/templates/custom/
 ```
 
