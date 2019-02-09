@@ -4,7 +4,6 @@
  * @var array $OPT
  */
 ?>
-        try_files $uri $uri/ =404;
         ## NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_param PATH_INFO $fastcgi_path_info;
