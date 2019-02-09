@@ -1,4 +1,4 @@
-# plesk-onyx-custom-conf-template-nginx-shopware
+# Plesk Onyx Custom Template for Shopware with nginx/FPM - incl. Stageware Support.
 
 This is a plesk onyx nginx conf template adaption of bcremer nginx configuration setup.
 
@@ -8,11 +8,14 @@ This is a plesk onyx nginx conf template adaption of bcremer nginx configuration
 ## Customization
 - Added WebP Support - static files
 - Added woff2 Support - cache
-- Refactor nginx location configuration to match custom theme fonts - regex 
+- Refactor nginx location configuration to match custom theme fonts - regex
+- Fixed issue with Shopware One-File Installer / initial Shopware installation
+- Fixed issue with Shopware Updates via Backend (404 not found)
+- Added Support for Stageware by TC-Innovations
 
 ## Tested on
 - Plesk Onyx 17.8.11
-- Ubuntu 18.04 LTS
+- CentOS 7.6
 
 ## How to use
 
